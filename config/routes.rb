@@ -1,6 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
   map.connect 'movies/feed.:format', :controller => 'movies', :action => 'index'
-  map.connect 'cnb/feed.:format', :controller => 'cnb', :action => 'index'
+
+  #map.connect 'cnb/feed.:format', :controller => 'cnb', :action => 'index'
+
+  map.resources :pcfilmtydne
 
   # The priority is based upon order of creation: first created -> highest priority.
 
