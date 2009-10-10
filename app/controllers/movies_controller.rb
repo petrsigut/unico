@@ -8,7 +8,6 @@ class MoviesController < ApplicationController
     # http://www.weheartcode.com/2007/04/03/scraping-imdb-with-ruby-and-hpricot/
     
     @doc = Hpricot(open("http://www.csfd.cz/"))
-    #doc = doc.to_s()
     @movies = @doc.search("//body")
     @movies = @movies.to_s()
 

@@ -8,11 +8,9 @@ class CnbController < ApplicationController
     # http://www.weheartcode.com/2007/04/03/scraping-imdb-with-ruby-and-hpricot/
     
     @doc = Hpricot(open("http://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.jsp"))
-    #doc = doc.to_s()
-    #@movies = @doc.at("//table/#kurzy_tisk").xpath
-    @movies = @doc.search("//table[@class='kurzy_tisk']")
+    @doc = @doc.search("//table[@class='kurzy_tisk']")
 
-    @movies = @movies.to_s()
+    @doc = @doc.to_s()
 
     
     # @movies.gsub!(/[\n\r]/, "")
@@ -21,15 +19,15 @@ class CnbController < ApplicationController
 #    @movies.gsub!(/(.)*<!-- Begin kurzak CNB -->/m, "")   #=> "sa st"
  #   @movies.gsub!(/<!-- End kurzak CNB -->(.)*/m, "")   #=> "sa st"
 #    @movies.gsub!(/tento mesic vychazi na DVD(.)*/m, "")   #=> "sa st"
-    @movies = Hpricot(@movies)
+ #   @movies = Hpricot(@movies)
     
-    @kurzy = {}
-    (@movies/"//table//tr").each do |row|
-      (row/"//td").each do |cell|
-        logger.fatal cell.inner_html
-      end
-        logger.fatal "XXX"
-    end
+    #@kurzy = {}
+#    (@movies/"//table//tr").each do |row|
+#      (row/"//td").each do |cell|
+#        logger.fatal cell.inner_html
+#      end
+#        logger.fatal "XXX"
+#    end
 
 
   end
