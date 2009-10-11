@@ -1,4 +1,10 @@
 class ContentsController < ApplicationController
+  layout :type_of_layout
+
+  def index
+    @contents = Content.find(:all)
+  end
+
   def show
     @name = params[:id]
 
@@ -16,6 +22,10 @@ class ContentsController < ApplicationController
     when "cnbkurzy"
       Cnbkurzy.parse_raw_html
       Cnbkurzy.parse_xml
+    when "photoofthedaycom"
+      Photoofthedaycom.parse_raw_html
+      Photoofthedaycom.parse_xml
+      @layout = "slideshow"
     end
 
     @content = Content.find_by_name(@name) # udelat pres tridni promenou?
@@ -28,5 +38,10 @@ class ContentsController < ApplicationController
     end
 
   end
+  
+  private
+    def type_of_layout
+      @layout
+    end
 
 end

@@ -5,16 +5,18 @@ class Csfddokin < Content
 
   def self.parse_raw_html
     @doc = Hpricot(open("http://www.csfd.cz/"))
-    @movies = @doc.search("//body")
-    @movies = @movies.to_s()
+    @doc = @doc.search("//body")
+    @doc = @doc.to_s()
     
-    @movies.gsub!(/(.)*Filmové novinky v kinech/m, "")   #=> "sa st"
-    @movies.gsub!(/Tento měsíc vychází na DVD(.)*/m, "")   #=> "sa st"
-    @movies.gsub!(/tento mesic vychazi na DVD(.)*/m, "")   #=> "sa st"
+    @doc.gsub!(/(.)*Filmové novinky v kinech/m, "")   #=> "sa st"
+    @doc.gsub!(/Tento měsíc vychází na DVD(.)*/m, "")   #=> "sa st"
+    @doc.gsub!(/tento mesic vychazi na DVD(.)*/m, "")   #=> "sa st"
+    
+    @doc = Hpricot(@doc)
+    @doc = @doc.at("//table")
 
-    @movies = '<link rel="stylesheet" type="text/css" href="http://localhost/~phax/test.css" />' + @movies
+#    @movies = '<link rel="stylesheet" type="text/css" href="http://localhost/~phax/test.css" />' + @movies
 
-    @doc = @movies
 
     save_me
   end
