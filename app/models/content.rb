@@ -2,7 +2,25 @@ class Content < ActiveRecord::Base
   require 'hpricot'
   require 'open-uri'
   require 'net/http'
+  require 'logger'
   require "rexml/document"
+
+  # needed for XML XSLT
+  require 'xml/libxml'
+  require 'xml/libxslt'
+
+  def self.html2txt(html)
+    # http://apidock.com/rails/ActionView/Helpers/SanitizeHelper/strip_tags
+    html = ActionController::Base.helpers.strip_tags(html)
+#    html = sanitize(html)
+  end
+
+  def self.transform_xml2html(xml)
+    xslt = XML::XSLT.new()
+    xslt.xml = xml.to_s
+    xslt.xsl = "#{RAILS_ROOT}/public/xml2html.xls"
+    xslt.serve()
+  end
   
   # private nebo tak neco?
   def self.create_xml_head
@@ -17,10 +35,9 @@ class Content < ActiveRecord::Base
   end
 
   def self.create_gallery(array_of_links)
-    html_chunk = '<div id="slideshow">'
-    html_chunk += "<img src=\"#{array_of_links[0]}\" alt=\"Slideshow Image 1\" class=\"active\" />\n"
+    html_chunk = "<a href=\"#\" class=\"show\" ><img src=\"#{array_of_links[0]}\" alt=\"Slideshow Image 1\" rel=\"fdsafa\"  /></a>\n"
     array_of_links.each_with_index do |link, index|
-      html_chunk += "<img src=\"#{array_of_links[index]}\" alt=\"Slideshow Image 1\" />\n"
+      html_chunk += "<a href=\"#\"><img src=\"#{array_of_links[index]}\" alt=\"Slideshow Image 1\" /></a>\n"
     end
 
     html_chunk += '</div>'
@@ -33,14 +50,32 @@ class Content < ActiveRecord::Base
     
     if @content.nil?
       @content = Content.new
+      @content.name = self.name
     end
     
-    @content.name = self.name
-    @content.xml = @kml_doc.to_s
-    @content.rawhtml = @doc.to_s
+    @content.name_human = @name_human
+   
+    if @kml_doc.nil?
+      @content.xml = nil
+    else
+      html_from_xml = transform_xml2html(@kml_doc)
+      @content.xml = @kml_doc.to_s
+      @content.xhtml = html_from_xml
+    end
+
+    if @rawhtml.nil?
+      @content.rawhtml = nil
+    else
+      @content.rawhtml = @rawhtml.to_s
+      txt = html2txt(@rawhtml.to_s)
+      @content.plaintext = txt
+    end
+    
+    # Rails detect whether we change the content of record and if not,
+    # update_at will not be updated. But we want to update it every time we
+    # regenerete content
+    @content.updated_at = Time.now 
     @content.save
-
-
   end
 
 

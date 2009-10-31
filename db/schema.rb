@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091010135514) do
+ActiveRecord::Schema.define(:version => 20091031120615) do
 
   create_table "contents", :force => true do |t|
     t.string   "name"
@@ -17,6 +17,9 @@ ActiveRecord::Schema.define(:version => 20091010135514) do
     t.text     "xml"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name_human"
+    t.text     "xhtml"
+    t.text     "plaintext"
   end
 
 end

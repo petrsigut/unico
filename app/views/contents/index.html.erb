@@ -1,6 +1,20 @@
 <% for content in @contents %>
- <div class="content">
-    <%=h content.name %>
-    <%= content.rawhtml %>
+  <div class="content">
+    <span><%=h content.name_human %></span>
+    
+    <% unless content.rawhtml.nil? %>
+      <span><%= link_to "HTML", "/contents/show/"+content.name+".html" %></span>
+    <% end %>
+
+    <% unless content.xml.nil? %>
+      <span><%= link_to "XML", "/contents/show/"+content.name+".xml" %></span>
+      <span><%= link_to "XHTML", "/contents/show/"+content.name+".xhtml" %></span>
+    <% end %>
+
+    <% unless content.rawhtml.nil? %>
+      <%= content.rawhtml %>
+    <% else %>
+      <%= content.xhtml %>
+    <% end %>
  </div>
 <% end %>

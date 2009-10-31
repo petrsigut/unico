@@ -3,6 +3,7 @@ class ContentsController < ApplicationController
 
   def index
     @contents = Content.find(:all)
+    @layout = "application"
   end
 
   def show
@@ -12,28 +13,43 @@ class ContentsController < ApplicationController
 
     # zautomatizovat to a udelat automaticky generovany index s prehledem...
     # (nahledem html v ramecku? to by bylo huste...)
-    case @name
-    when "pcfilmtydne"
-      Pcfilmtydne.parse_raw_html
-      Pcfilmtydne.parse_xml
-    when "csfddokin"
-      Csfddokin.parse_raw_html
-      Csfddokin.parse_xml
-    when "cnbkurzy"
-      Cnbkurzy.parse_raw_html
-      Cnbkurzy.parse_xml
-    when "photoofthedaycom"
-      Photoofthedaycom.parse_raw_html
-      Photoofthedaycom.parse_xml
-      @layout = "slideshow"
+    # http://infovore.org/archives/2006/08/02/getting-a-class-object-in-ruby-from-a-string-containing-that-classes-name/
+
+    @name = @name.humanize
+    @content = Content.find(:all, :select => 'name')
+
+    found_in_db = false
+    @content.each do |name|
+      if @name == name.name
+        found_in_db = true
+      end
     end
 
-    @content = Content.find_by_name(@name) # udelat pres tridni promenou?
+    if found_in_db
+      @content = Content.find_by_name(@name, :select => 'updated_at')
+      if @content.updated_at < 10.seconds.ago # should be set by variable in content model
+        (@name).constantize.parse_content
+      end
+      @content = Content.find_by_name(@name)
+    else
+       render :file => "#{RAILS_ROOT}/public/404.html",  :status => 404 and return  
+    end
+
+
+    # udelat pres tridni promenou?
     # a pak v tom modelu aby si moh programator vybrat jestli se to obali
     # standardni HTML hlavickou a tak nebo ne...
-    
+   
+    # http://dev.rubyonrails.org/svn/rails/trunk/actionpack/lib/action_controller/mime_types.rb
+    #  Mime::Type.register "image/jpg", :jpg
+     Mime::Type.register "text/html", :xhtml
+     Mime::Type.register "text/plain", :txt
+
+
     respond_to do |format|
       format.html # show.html.erb
+      format.xhtml # show.xhtml.erb
+      format.txt # show.txt.erb
       format.xml  { render :xml => @content.xml }
     end
 

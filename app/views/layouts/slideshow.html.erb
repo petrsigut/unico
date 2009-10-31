@@ -1,85 +1,147 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <%= stylesheet_link_tag 'style' %>
-<!-- tady budu muset nacpat absolutni cestu? To ale nejde... poresit -->
-  <%= javascript_include_tag 'jquery.js' %>
+<title>JQuery Photo Slider with Semi Transparent Caption</title>
+
+<%= javascript_include_tag 'jquery.js' %>
 <script type="text/javascript">
 
-/*** 
-    Simple jQuery Slideshow Script
-    Released by Jon Raasch (jonraasch.com) under FreeBSD license: free to use or modify, not responsible for anything, etc.  Please link out to me if you like it :)
-***/
+$(document).ready(function() {		
+	
+	//Execute the slideShow
+	slideShow();
 
-function slideSwitch() {
-    var $active = $('#slideshow IMG.active');
-
-    if ( $active.length == 0 ) $active = $('#slideshow IMG:last');
-
-    // use this to pull the images in the order they appear in the markup
-    var $next =  $active.next().length ? $active.next()
-        : $('#slideshow IMG:first');
-
-    // uncomment the 3 lines below to pull the images in random order
-    
-    // var $sibs  = $active.siblings();
-    // var rndNum = Math.floor(Math.random() * $sibs.length );
-    // var $next  = $( $sibs[ rndNum ] );
-
-
-    $active.addClass('last-active');
-
-    $next.css({opacity: 0.0})
-        .addClass('active')
-        .animate({opacity: 1.0}, 1000, function() {
-            $active.removeClass('active last-active');
-        });
-}
-
-$(function() {
-    setInterval( "slideSwitch()", 1000 );
 });
 
+function slideShow() {
+
+	//Set the opacity of all images to 0
+        // $('#gallery a').css({opacity: 0.0});
+        $('#gallery a').css("display","none"); 
+	
+	//Get the first image and display it (set it to full opacity)
+        //$('#gallery a:first').css({opacity: 1.0});
+        $('#gallery a:first').css("display", "block" ); 
+	
+	//Set the caption background to semi-transparent
+	$('#gallery .caption').css({opacity: 0.7});
+
+	//Resize the width of the caption according to the image width
+	$('#gallery .caption').css({width: $('#gallery a').find('img').css('width')});
+	
+	//Get the caption of the first image from REL attribute and display it
+	$('#gallery .content').html($('#gallery a:first').find('img').attr('rel'))
+	.animate({opacity: 0.7}, 400);
+	
+	//Call the gallery function to run the slideshow, 6000 = change to next image after 6 seconds
+	setInterval('gallery()',6000);
+	
+}
+
+function gallery() {
+	
+	//if no IMGs have the show class, grab the first image
+	var current = ($('#gallery a.show')?  $('#gallery a.show') : $('#gallery a:first'));
+
+	//Get next image, if it reached the end of the slideshow, rotate it back to the first image
+	var next = ((current.next().length) ? ((current.next().hasClass('caption'))? $('#gallery a:first') :current.next()) : $('#gallery a:first'));	
+	
+	//Get next image caption
+	var caption = next.find('img').attr('rel');	
+
+        //Set the fade in effect for the next image, show class has higher z-index
+        next.css({
+        display: 'block',
+        opacity: 0.0
+        })
+        .addClass('show')
+        .animate({opacity: 1.0}, 1000);
+
+//	next.css({opacity: 0.0})
+//	.addClass('show')
+//	.animate({opacity: 1.0}, 1000);
+
+	//Hide the current image
+	//current.animate({opacity: 0.0}, 1000)
+	//.removeClass('show');
+        current.animate({opacity: 0.0}, 1000)
+        .css({display: 'none'})
+        .removeClass('show'); 
+	
+	//Set the opacity to 0 and height to 1px
+	$('#gallery .caption').animate({opacity: 0.0}, { queue:false, duration:0 }).animate({height: '1px'}, { queue:true, duration:300 });	
+	
+	//Animate the caption, opacity to 0.7 and heigth to 100px, a slide up effect
+	$('#gallery .caption').animate({opacity: 0.7},100 ).animate({height: '100px'},500 );
+	
+	//Display the content
+	$('#gallery .content').html(caption);
+	
+	
+}
+
 </script>
-
 <style type="text/css">
-
-/*** set the width and height to match your images **/
-
-#slideshow {
-    position:relative;
-    height:650px;
+body{
+	font-family:arial
 }
 
-#slideshow IMG {
-    position:absolute;
-    top:0;
-    left:0;
-    z-index:8;
-    opacity:0.0;
+.clear {
+	clear:both
 }
 
-#slideshow IMG.active {
-    z-index:10;
-    opacity:1.0;
+#gallery {
+	position:relative;
+	height:360px
 }
+	#gallery a {
+		float:left;
+		position:absolute;
+	}
+	
+	#gallery a img {
+		border:none;
+	}
+	
+	#gallery a.show {
+		z-index:500
+	}
 
-#slideshow IMG.last-active {
-    z-index:9;
-}
+	#gallery .caption {
+		z-index:600; 
+		background-color:#000; 
+		color:#ffffff; 
+		height:100px; 
+		width:100%; 
+		position:absolute;
+		bottom:0;
+	}
+
+	#gallery .caption .content {
+		margin:5px
+	}
+	
+	#gallery .caption .content h3 {
+		margin:0;
+		padding:0;
+		color:#1DCCEF;
+	}
+	
 
 </style>
 </head>
-
-
 <body>
-
-<p style="color: green"><%= flash[:notice] %></p>
+<div id="gallery">
 
 <%= yield %>
+
+<div class="caption"><div class="content"></div></div>
+</div>
+<div class="clear"></div>
+
+<br/><br/>
+<div style="font-size:10px;color:#ccc">Except where otherwise noted, content on this site is licensed under a Creative Commons Attribution 3.0 License.</div>
+
 
 </body>
 </html>

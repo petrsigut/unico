@@ -1,6 +1,7 @@
 div.content {
-  border: 1px solid red;
-  width: 200px;
+  border: 1px solid gray;
+  width: 250px;
   height: 200px;
   overflow:auto;
+  float: right;
 }
