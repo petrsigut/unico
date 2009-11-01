@@ -63,13 +63,24 @@ class Content < ActiveRecord::Base
       @content.xhtml = html_from_xml
     end
 
+    logger.info "Entering HTML saving"
     if @rawhtml.nil?
       @content.rawhtml = nil
     else
+      if PUSH_ENABLE and (@content.rawhtml != @rawhtml.to_s)
+        unless @content.id.nil? # could be if it is first calling of new model
+          Juggernaut.send_to_channel("location.reload();", [@content.id])
+          logger.fatal "push happen"
+          logger.fatal @content.name
+        end
+      else
+        logger.info "push NOT happen"
+      end
       @content.rawhtml = @rawhtml.to_s
       txt = html2txt(@rawhtml.to_s)
       @content.plaintext = txt
     end
+    logger.info "Leaving HTML saving"
     
     # Rails detect whether we change the content of record and if not,
     # update_at will not be updated. But we want to update it every time we

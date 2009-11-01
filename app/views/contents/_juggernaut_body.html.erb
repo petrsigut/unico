@@ -1,0 +1,6 @@
+<textarea id="console_text" style="width: 0px; height: 0px; visibility: hidden"></textarea>
+  <%=
+    # this will render the javascript that will 'cause listening to listen_to_channel channel
+  juggernaut(:channels => [@content.id], :client_id => request.session_options[:id]) 
+  %>
+

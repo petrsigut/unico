@@ -1,1 +1,10 @@
-<%= @content.rawhtml %>
+<%= @query %>
+<html>
+  <head>
+    <%= render :partial => "juggernaut_head" %>
+  </head>
+  <body>
+  <%= @content.rawhtml %>
+  <%= render :partial => "juggernaut_body" %>
+  </body>
+</html>

@@ -1,6 +1,16 @@
 class ContentsController < ApplicationController
   layout :type_of_layout
 
+  protect_from_forgery :only => [:index] 
+
+  def send_data
+    render :juggernaut => {:channels => [params[:send_to_channel]], :type => :send_to_channels} do |page|
+      page.insert_html :top, 'chat_data', h(params[:chat_input])+"\n"
+    end
+    render :nothing => true
+  end
+
+
   def index
     @contents = Content.find(:all)
     @layout = "application"
@@ -8,6 +18,12 @@ class ContentsController < ApplicationController
 
   def show
     @name = params[:id]
+    
+    if params[:query] =~ /^\w+$/i
+      @query = params[:query]
+    end
+
+
 
     # at nam pod to @name nepodstrci nejakou prasarnu!
 
