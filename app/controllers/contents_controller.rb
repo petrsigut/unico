@@ -10,43 +10,58 @@ class ContentsController < ApplicationController
     render :nothing => true
   end
 
-
   def index
-    @contents = Content.find(:all)
+    @contents = Content.find(:all, :order => "name")
     @layout = "application"
   end
 
   def show
-    @name = params[:id]
-    
-    if params[:query] =~ /^\w+$/i
-      @query = params[:query]
+
+    name = params[:id]
+
+    query = {}
+    params.each do |param|
+      if (param[0] =~ /^\w+$/i and
+          param[1] =~ /^\w+$/i and
+          param[0] != "id" and
+          param[0] != "format" and
+          param[0] != "action" and
+          param[0] != "controller") then
+        query[param[0]] = param[1]
+      end
     end
 
+    logger.fatal "Query"
+    logger.fatal query.inspect
+    logger.fatal "Query NIL?"
+    logger.fatal query.empty?
 
 
-    # at nam pod to @name nepodstrci nejakou prasarnu!
+
+
+    # at nam pod to name nepodstrci nejakou zlou vec
 
     # zautomatizovat to a udelat automaticky generovany index s prehledem...
     # (nahledem html v ramecku? to by bylo huste...)
     # http://infovore.org/archives/2006/08/02/getting-a-class-object-in-ruby-from-a-string-containing-that-classes-name/
 
-    @name = @name.humanize
+    name = name.humanize
     @content = Content.find(:all, :select => 'name')
 
     found_in_db = false
-    @content.each do |name|
-      if @name == name.name
+    @content.each do |content_name|
+      if name == content_name.name
         found_in_db = true
       end
     end
 
     if found_in_db
-      @content = Content.find_by_name(@name, :select => 'updated_at')
-      if @content.updated_at < 10.seconds.ago # should be set by variable in content model
-        (@name).constantize.parse_content
-      end
-      @content = Content.find_by_name(@name)
+      #@content = Content.find_by_name(@name, :select => 'updated_at')
+      #if @content.updated_at < 10.seconds.ago # should be set by variable in content model
+        @content = (name).constantize.parse_content(query)
+        logger.fatal "call parse_content"
+      #end
+      #@content = Content.find_by_name(@name)
     else
        render :file => "#{RAILS_ROOT}/public/404.html",  :status => 404 and return  
     end

@@ -11,6 +11,10 @@
       <span><%= link_to "XHTML", "/contents/show/"+content.name+".xhtml" %></span>
     <% end %>
 
+    <% unless content.plaintext.nil? %>
+      <span><%= link_to "TXT", "/contents/show/"+content.name+".txt" %></span>
+    <% end %>
+
     <% unless content.rawhtml.nil? %>
       <%= content.rawhtml %>
     <% else %>

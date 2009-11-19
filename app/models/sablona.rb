@@ -1,14 +1,13 @@
 class Model < Content
-   attr_accessor :name
 
-  def self.parse_raw_html
-    @doc = Hpricot(open(""))
+  def self.parse_content(query = {})
+    content = Model.new
+    content.name_human = "Human name"
 
-    save_me
-  end
+    rawhtml = Hpricot(open(""))
+    content = rawhtml
 
-  def self.parse_xml
-    save_me
+    content.save_me(query)
   end
 
 end
