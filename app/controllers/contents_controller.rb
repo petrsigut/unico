@@ -59,6 +59,7 @@ class ContentsController < ApplicationController
       #@content = Content.find_by_name(@name, :select => 'updated_at')
       #if @content.updated_at < 10.seconds.ago # should be set by variable in content model
         @content = (name).constantize.parse_content(query)
+        @layout = (name).constantize.mylayout
         logger.fatal "call parse_content"
       #end
       #@content = Content.find_by_name(@name)

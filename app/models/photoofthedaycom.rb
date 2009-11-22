@@ -1,8 +1,13 @@
 class Photoofthedaycom < Content
 
+  def self.mylayout
+    "slideshow"
+  end
+
   def self.parse_content(query = {})
     content = Photoofthedaycom.new
     content.name_human = "Photo of the Day"
+
 
     year = Time.now.strftime("%Y")
     # with leading zeros

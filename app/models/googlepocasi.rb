@@ -7,15 +7,17 @@ class Googlepocasi < Content
 
     if query["city"].nil?
       url="http://www.google.com/ig/api?weather=brno,czech+republic&hl=en"
+      city = "brno"
     else
       url="http://www.google.com/ig/api?weather=#{query["city"]},czech+republic&hl=en"
+      city = query["city"]
     end
     
     xml_data = Net::HTTP.get_response(URI.parse(url)).body
     doc = REXML::Document.new(xml_data)
 
     content.create_xml_head
-    content.create_xml_body("label", query["city"])
+    content.create_xml_body("label", city)
 
     url_base = "http://www.google.com"
 
@@ -36,6 +38,8 @@ class Googlepocasi < Content
         content.create_xml_body(element_name, element_data)
       end
     end
+    
+    content.create_xml_body("video", "nejaka vec")
 
 
     content.save_me(query)

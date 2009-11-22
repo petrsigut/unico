@@ -18,7 +18,7 @@ development:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: pcp_development
+  database: unico_development
   pool: 5
   username: petr
   password: SQL_bubu78
@@ -31,7 +31,7 @@ test:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: pcp_test
+  database: unico_test
   pool: 5
   username: root
   password:
@@ -41,7 +41,7 @@ production:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: pcp_production
+  database: unico_production
   pool: 5
   username: root
   password: 

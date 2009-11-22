@@ -33,7 +33,7 @@ class Content < ActiveRecord::Base
   def transform_xml2html(xml)
     xslt = XML::XSLT.new()
     xslt.xml = xml.to_s
-    xslt.xsl = "#{RAILS_ROOT}/public/xml2html.xls"
+    xslt.xsl = "#{RAILS_ROOT}/public/xml2html.xsl"
     xslt.serve()
   end
   
@@ -53,7 +53,7 @@ class Content < ActiveRecord::Base
   def self.create_gallery(array_of_links)
     html_chunk = "<a href=\"#\" class=\"show\" ><img src=\"#{array_of_links[0]}\" alt=\"Slideshow Image 1\" rel=\"fdsafa\"  /></a>\n"
     array_of_links.each_with_index do |link, index|
-      html_chunk += "<a href=\"#\"><img src=\"#{array_of_links[index]}\" alt=\"Slideshow Image 1\" /></a>\n"
+      html_chunk += "<a href=\"#\"><img src=\"#{array_of_links[index+1]}\" alt=\"Slideshow Image 1\" /></a>\n"
     end
 
     html_chunk += '</div>'
@@ -114,6 +114,7 @@ class Content < ActiveRecord::Base
       # update_at will not be updated. But we want to update it every time we
       # regenerete content
       self.updated_at = Time.now 
+      self.created_at = content_old.created_at
       self.name = self.class.name
      
       # we do not want do save/cache contents with user's query
