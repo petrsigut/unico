@@ -14,6 +14,10 @@ class Content < ActiveRecord::Base
   require 'xml/libxml'
   require 'xml/libxslt'
 
+  def self.mylayout
+    "application"
+  end
+
   def html2txt(html)
     # http://apidock.com/rails/ActionView/Helpers/SanitizeHelper/strip_tags
     
