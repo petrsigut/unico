@@ -2,8 +2,22 @@ div.content {
   border: 1px solid gray;
   width: 250px;
   height: 200px;
-  overflow: auto;
+  overflow: hidden;
   float: left;
   margin: 20px;
   padding: 12px;
+  background-color: white;
+}
+
+div.content:hover {
+  border: 1px solid #009fe5;
+}
+
+
+.logo {
+  margin-left: 20px;
+}
+
+body {
+  background-color: #ebebeb;
 }

@@ -12,6 +12,8 @@ class Idsjmk < Content
 
 
     rawhtml = Hpricot(open(url))
+    rawhtml = rawhtml.at("//div")
+    
     content.rawhtml = rawhtml.to_s
 
     content.save_me(query)

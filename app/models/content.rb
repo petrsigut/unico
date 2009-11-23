@@ -1,4 +1,6 @@
 class Content < ActiveRecord::Base
+  has_one :category
+
   require 'hpricot'
   require 'open-uri'
   require 'net/http'

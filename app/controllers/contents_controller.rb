@@ -12,7 +12,9 @@ class ContentsController < ApplicationController
 
   def index
     @contents = Content.find(:all, :order => "name")
-    @layout = "application"
+#    @categories = Category.find(:all)
+    
+    @layout = "index"
   end
 
   def show

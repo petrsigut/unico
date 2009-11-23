@@ -7,7 +7,7 @@ class Fiterminy < Content
     rawhtml = Hpricot(open("http://www.fi.muni.cz/studies/dates.xhtml"))
 
     rawhtml = rawhtml.search("//table")
-    logger.fatal rawhtml.inspect
+    #logger.fatal rawhtml.inspect
 
     if (query["mgr"] == "yes")
       content.rawhtml = rawhtml.second.to_s

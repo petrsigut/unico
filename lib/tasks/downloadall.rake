@@ -8,7 +8,7 @@ task(:downloadall => :environment) do
  files = Dir.glob("*.rb")
  files.each do |model|
    model.chomp!('.rb')
-   if (model != 'sablona' and model != 'content')
+   if (model != 'sablona' and model != 'content' and model != 'category')
      (model).humanize.constantize.parse_content
      puts (model).humanize + " called parse_content"
    end

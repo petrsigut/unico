@@ -1,3 +1,11 @@
+<div class="logo">
+  <img src="/images/logo.png" alt="Unico" />
+</div>
+
+<div class="filter">
+    <%#= select @categories %>
+</div>
+
 <% for content in @contents %>
   <div class="content">
     <span><%=h content.name_human %></span>
