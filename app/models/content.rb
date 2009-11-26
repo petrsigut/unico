@@ -13,8 +13,8 @@ class Content < ActiveRecord::Base
   require 'htmlentities'
 
   # needed for XML XSLT
-  require 'xml/libxml'
-  require 'xml/libxslt'
+  require 'libxml'
+  require 'libxslt'
 
   def self.mylayout
     "application"

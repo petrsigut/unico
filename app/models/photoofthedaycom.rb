@@ -7,6 +7,7 @@ class Photoofthedaycom < Content
   def self.parse_content(query = {})
     content = Photoofthedaycom.new
     content.name_human = "Photo of the Day"
+    content.category_id = 3
 
 
     year = Time.now.strftime("%Y")

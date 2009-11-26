@@ -11,8 +11,17 @@ class ContentsController < ApplicationController
   end
 
   def index
-    @contents = Content.find(:all, :order => "name")
+    category = params[:category_id]
+
+    if (category == "0")
+      @contents = Content.find(:all, :order => "name")
+    else
+      @contents = Content.find(:all, :order => "name", :conditions => ["category_id = ?", category])
+    end
 #    @categories = Category.find(:all)
+    # http://keepwithinthelines.wordpress.com/2008/03/17/using-select-helper-in-rails/
+    @categories =  Category.find(:all)
+    @categories = [ ["all", 0] ] + @categories.map {|p| [ p.name, p.id ] }
     
     @layout = "index"
   end

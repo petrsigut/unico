@@ -3,6 +3,7 @@ class Capitolwords < Content
   def self.parse_content(query = {})
     content = Capitolwords.new
     content.name_human = "Top capitol words today"
+    content.category_id = 3
 
     if query["number"].nil?
       url = "http://capitolwords.org/api/wod/latest/top10.xml"
