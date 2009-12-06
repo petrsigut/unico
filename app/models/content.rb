@@ -8,13 +8,13 @@ class Content < ActiveRecord::Base
   require "rexml/document"
 
   # do decode html entities in html2txt
-#  require 'rubygems'
+  require 'rubygems'
   #  script/server needs restart after installing new gem
   require 'htmlentities'
 
   # needed for XML XSLT
-  require 'libxml'
-  require 'libxslt'
+  require 'xml/libxml'
+  require 'xml/libxslt'
 
   def self.mylayout
     "application"
@@ -36,9 +36,9 @@ class Content < ActiveRecord::Base
 #    html = sanitize(html)
   end
 
-  def transform_xml2html(xml)
+  def transform_xml2html(xml_data)
     xslt = XML::XSLT.new()
-    xslt.xml = xml.to_s
+    xslt.xml = xml_data.to_s
     xslt.xsl = "#{RAILS_ROOT}/public/xml2html.xsl"
     xslt.serve()
   end

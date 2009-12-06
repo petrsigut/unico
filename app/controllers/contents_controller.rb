@@ -67,13 +67,16 @@ class ContentsController < ApplicationController
     end
 
     if found_in_db
-      #@content = Content.find_by_name(@name, :select => 'updated_at')
-      #if @content.updated_at < 10.seconds.ago # should be set by variable in content model
+      @content = Content.find_by_name(name, :select => 'updated_at')
+      
+      # the time should be setable by variable in content model
+      @layout = (name).constantize.mylayout
+      if (@content.updated_at < 10.seconds.ago or not query.empty?)
         @content = (name).constantize.parse_content(query)
-        @layout = (name).constantize.mylayout
         logger.fatal "call parse_content"
-      #end
-      #@content = Content.find_by_name(@name)
+      else # we want content from db
+        @content = Content.find_by_name(name)
+      end
     else
        render :file => "#{RAILS_ROOT}/public/404.html",  :status => 404 and return  
     end
