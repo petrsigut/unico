@@ -1,9 +1,9 @@
 <html>
   <head>
-    <%= if PUSH_ENABLE then render :partial => "juggernaut_head" end %>
+    <%= if (PUSH_ENABLE and @query.empty?) then render :partial => "juggernaut_head" end %>
   </head>
   <body>
   <%= @content.rawhtml %>
-  <%= if PUSH_ENABLE then render :partial => "juggernaut_body" end %>
+  <%= if (PUSH_ENABLE and @query.empty?) then render :partial => "juggernaut_body" end %>
   </body>
 </html>

@@ -4,7 +4,7 @@
 # RAILS_GEM_VERSION = '2.3.2' unless defined? RAILS_GEM_VERSION
 
 # Should we use Push funcionality?
-PUSH_ENABLE = false
+PUSH_ENABLE = true
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')

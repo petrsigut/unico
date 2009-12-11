@@ -30,7 +30,7 @@ class ContentsController < ApplicationController
 
     name = params[:id]
 
-    query = {}
+    @query = {}
     params.each do |param|
       if (param[0] =~ /^\w+$/i and
           param[1] =~ /^\w+$/i and
@@ -38,14 +38,14 @@ class ContentsController < ApplicationController
           param[0] != "format" and
           param[0] != "action" and
           param[0] != "controller") then
-        query[param[0]] = param[1]
+        @query[param[0]] = param[1]
       end
     end
 
     logger.fatal "Query"
-    logger.fatal query.inspect
+    logger.fatal @query.inspect
     logger.fatal "Query NIL?"
-    logger.fatal query.empty?
+    logger.fatal @query.empty?
 
 
 
@@ -71,8 +71,8 @@ class ContentsController < ApplicationController
       
       # the time should be setable by variable in content model
       @layout = (name).constantize.mylayout
-      if (@content.updated_at < 10.seconds.ago or not query.empty?)
-        @content = (name).constantize.parse_content(query)
+      if (@content.updated_at < 10.seconds.ago or not @query.empty?)
+        @content = (name).constantize.parse_content(@query)
         logger.fatal "call parse_content"
       else # we want content from db
         @content = Content.find_by_name(name)
