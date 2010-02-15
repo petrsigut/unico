@@ -42,18 +42,18 @@ class Content < ActiveRecord::Base
     xslt.xsl = "#{RAILS_ROOT}/public/xml2html.xsl"
     xslt.serve()
   end
-  
+
   def create_xml_head
     @xml = REXML::Document.new
-    @kml = @xml.add_element 'kml', {'xmlns' => 'http://kml.ns.cz'}
-    @kml_doc = @kml.add_element 'document'
-    self.xml = @kml_doc
+    #@kml = @xml.add_element 'kml', {'xmlns' => 'http://kml.ns.cz'}
+    @xml_doc = @xml.add_element 'document'
+    self.xml = @xml_doc
   end
 
   def create_xml_body(entity_name, entity_text)
-    (@kml_doc.add_element entity_name).text = entity_text
+    (@xml_doc.add_element entity_name).text = entity_text
     #(@kml_doc.add_element 'video').text = "http://tinyvid.tv/vfe/big_buck_bunny.mp4"
-    self.xml = @kml_doc.to_s
+    self.xml = @xml_doc.to_s
   end
 
   def self.create_gallery(array_of_links)

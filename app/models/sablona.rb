@@ -5,7 +5,7 @@ class Model < Content
     content.name_human = "Human name"
 
     rawhtml = Hpricot(open(""))
-    content = rawhtml
+    content.rawhtml = rawhtml.to_s
 
     content.save_me(query)
   end

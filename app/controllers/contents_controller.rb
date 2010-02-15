@@ -3,13 +3,7 @@ class ContentsController < ApplicationController
 
   protect_from_forgery :only => [:index] 
 
-  def send_data
-    render :juggernaut => {:channels => [params[:send_to_channel]], :type => :send_to_channels} do |page|
-      page.insert_html :top, 'chat_data', h(params[:chat_input])+"\n"
-    end
-    render :nothing => true
-  end
-
+  # get data to show all contents
   def index
     category = params[:category_id]
 
@@ -27,7 +21,6 @@ class ContentsController < ApplicationController
   end
 
   def show
-
     name = params[:id]
 
     @query = {}
@@ -42,18 +35,11 @@ class ContentsController < ApplicationController
       end
     end
 
-    logger.fatal "Query"
-    logger.fatal @query.inspect
-    logger.fatal "Query NIL?"
-    logger.fatal @query.empty?
+    #logger.fatal "Query"
+    #logger.fatal @query.inspect
+    #logger.fatal "Query NIL?"
+    #logger.fatal @query.empty?
 
-
-
-
-    # at nam pod to name nepodstrci nejakou zlou vec
-
-    # zautomatizovat to a udelat automaticky generovany index s prehledem...
-    # (nahledem html v ramecku? to by bylo huste...)
     # http://infovore.org/archives/2006/08/02/getting-a-class-object-in-ruby-from-a-string-containing-that-classes-name/
 
     name = name.humanize
@@ -72,7 +58,7 @@ class ContentsController < ApplicationController
       # the time should be setable by variable in content model
       @layout = (name).constantize.mylayout
       if (@content.updated_at < 10.seconds.ago or not @query.empty?)
-        @content = (name).constantize.parse_content(@query)
+        @content = (name).constantize.parse_content(@query) # make objeckt from var name
         logger.fatal "call parse_content"
       else # we want content from db
         @content = Content.find_by_name(name)
@@ -82,10 +68,6 @@ class ContentsController < ApplicationController
     end
 
 
-    # udelat pres tridni promenou?
-    # a pak v tom modelu aby si moh programator vybrat jestli se to obali
-    # standardni HTML hlavickou a tak nebo ne...
-   
     # http://dev.rubyonrails.org/svn/rails/trunk/actionpack/lib/action_controller/mime_types.rb
     #  Mime::Type.register "image/jpg", :jpg
      Mime::Type.register "text/html", :xhtml
