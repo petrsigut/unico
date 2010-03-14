@@ -1,0 +1,293 @@
+have_library: checking for atan() in -lm... -------------------- no
+
+"gcc -o conftest -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC   conftest.c  -L. -L/usr/lib -L/usr/lib -L. -Wl,-Bsymbolic-functions -rdynamic -Wl,-export-dynamic     -lruby1.8-static -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:3: error: ‘atan’ undeclared (first use in this function)
+conftest.c:3: error: (Each undeclared identifier is reported only once
+conftest.c:3: error: for each function it appears in.)
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { void ((*volatile p)()); p = (void ((*)()))atan; return 0; }
+/* end */
+
+"gcc -o conftest -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC   conftest.c  -L. -L/usr/lib -L/usr/lib -L. -Wl,-Bsymbolic-functions -rdynamic -Wl,-export-dynamic     -lruby1.8-static -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:3: warning: incompatible implicit declaration of built-in function ‘atan’
+conftest.c:3: error: too few arguments to function ‘atan’
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { atan(); return 0; }
+/* end */
+
+--------------------
+
+have_library: checking for atan() in -lm... -------------------- yes
+
+"gcc -o conftest -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC   -fno-builtin conftest.c  -L. -L/usr/lib -L/usr/lib -L. -Wl,-Bsymbolic-functions -rdynamic -Wl,-export-dynamic     -lruby1.8-static -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:3: error: ‘atan’ undeclared (first use in this function)
+conftest.c:3: error: (Each undeclared identifier is reported only once
+conftest.c:3: error: for each function it appears in.)
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { void ((*volatile p)()); p = (void ((*)()))atan; return 0; }
+/* end */
+
+"gcc -o conftest -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC   -fno-builtin conftest.c  -L. -L/usr/lib -L/usr/lib -L. -Wl,-Bsymbolic-functions -rdynamic -Wl,-export-dynamic     -lruby1.8-static -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { atan(); return 0; }
+/* end */
+
+--------------------
+
+have_library: checking for inflate() in -lz... -------------------- yes
+
+"gcc -o conftest -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC   conftest.c  -L. -L/usr/lib -L/usr/lib -L. -Wl,-Bsymbolic-functions -rdynamic -Wl,-export-dynamic    -lm  -lruby1.8-static -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:3: error: ‘inflate’ undeclared (first use in this function)
+conftest.c:3: error: (Each undeclared identifier is reported only once
+conftest.c:3: error: for each function it appears in.)
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { void ((*volatile p)()); p = (void ((*)()))inflate; return 0; }
+/* end */
+
+"gcc -o conftest -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC   conftest.c  -L. -L/usr/lib -L/usr/lib -L. -Wl,-Bsymbolic-functions -rdynamic -Wl,-export-dynamic    -lm  -lruby1.8-static -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { inflate(); return 0; }
+/* end */
+
+--------------------
+
+have_library: checking for xmlXPtrNewRange() in -lxml2... -------------------- yes
+
+"gcc -o conftest -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC   conftest.c  -L. -L/usr/lib -L/usr/lib -L. -Wl,-Bsymbolic-functions -rdynamic -Wl,-export-dynamic    -lz -lm  -lruby1.8-static -lxml2 -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:3: error: ‘xmlXPtrNewRange’ undeclared (first use in this function)
+conftest.c:3: error: (Each undeclared identifier is reported only once
+conftest.c:3: error: for each function it appears in.)
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { void ((*volatile p)()); p = (void ((*)()))xmlXPtrNewRange; return 0; }
+/* end */
+
+"gcc -o conftest -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC   conftest.c  -L. -L/usr/lib -L/usr/lib -L. -Wl,-Bsymbolic-functions -rdynamic -Wl,-export-dynamic    -lz -lm  -lruby1.8-static -lxml2 -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { xmlXPtrNewRange(); return 0; }
+/* end */
+
+--------------------
+
+have_header: checking for libxml/xmlversion.h... -------------------- no
+
+"gcc -E -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC    conftest.c -o conftest.i"
+conftest.c:1:31: error: libxml/xmlversion.h: No such file or directory
+checked program was:
+/* begin */
+1: #include <libxml/xmlversion.h>
+/* end */
+
+--------------------
+
+find_header: checking for libxml/xmlversion.h in /opt/include/libxml2,/usr/local/include/libxml2,/usr/include/libxml2... -------------------- yes
+
+"gcc -E -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC    conftest.c -o conftest.i"
+conftest.c:1:31: error: libxml/xmlversion.h: No such file or directory
+checked program was:
+/* begin */
+1: #include <libxml/xmlversion.h>
+/* end */
+
+"gcc -E -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC   -I/opt/include/libxml2 conftest.c -o conftest.i"
+conftest.c:1:31: error: libxml/xmlversion.h: No such file or directory
+checked program was:
+/* begin */
+1: #include <libxml/xmlversion.h>
+/* end */
+
+"gcc -E -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC   -I/usr/local/include/libxml2 conftest.c -o conftest.i"
+conftest.c:1:31: error: libxml/xmlversion.h: No such file or directory
+checked program was:
+/* begin */
+1: #include <libxml/xmlversion.h>
+/* end */
+
+"gcc -E -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC   -I/usr/include/libxml2 conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include <libxml/xmlversion.h>
+/* end */
+
+--------------------
+
+have_library: checking for xsltApplyStylesheet() in -lxslt... -------------------- yes
+
+"gcc -o conftest -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext -I/usr/include/libxml2  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC   conftest.c  -L. -L/usr/lib -L/usr/lib -L. -Wl,-Bsymbolic-functions -rdynamic -Wl,-export-dynamic    -lxml2 -lz -lm  -lruby1.8-static -lxslt -lxml2 -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:3: error: ‘xsltApplyStylesheet’ undeclared (first use in this function)
+conftest.c:3: error: (Each undeclared identifier is reported only once
+conftest.c:3: error: for each function it appears in.)
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { void ((*volatile p)()); p = (void ((*)()))xsltApplyStylesheet; return 0; }
+/* end */
+
+"gcc -o conftest -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext -I/usr/include/libxml2  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC   conftest.c  -L. -L/usr/lib -L/usr/lib -L. -Wl,-Bsymbolic-functions -rdynamic -Wl,-export-dynamic    -lxml2 -lz -lm  -lruby1.8-static -lxslt -lxml2 -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { xsltApplyStylesheet(); return 0; }
+/* end */
+
+--------------------
+
+have_header: checking for xslt.h... -------------------- no
+
+"gcc -E -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext -I/usr/include/libxml2  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC    conftest.c -o conftest.i"
+conftest.c:1:18: error: xslt.h: No such file or directory
+checked program was:
+/* begin */
+1: #include <xslt.h>
+/* end */
+
+--------------------
+
+find_header: checking for xslt.h in /opt/include/libxslt,/usr/local/include/libxslt,/usr/include/libxslt... -------------------- yes
+
+"gcc -E -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext -I/usr/include/libxml2  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC    conftest.c -o conftest.i"
+conftest.c:1:18: error: xslt.h: No such file or directory
+checked program was:
+/* begin */
+1: #include <xslt.h>
+/* end */
+
+"gcc -E -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext -I/usr/include/libxml2  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC   -I/opt/include/libxslt conftest.c -o conftest.i"
+conftest.c:1:18: error: xslt.h: No such file or directory
+checked program was:
+/* begin */
+1: #include <xslt.h>
+/* end */
+
+"gcc -E -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext -I/usr/include/libxml2  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC   -I/usr/local/include/libxslt conftest.c -o conftest.i"
+conftest.c:1:18: error: xslt.h: No such file or directory
+checked program was:
+/* begin */
+1: #include <xslt.h>
+/* end */
+
+"gcc -E -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext -I/usr/include/libxml2  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC   -I/usr/include/libxslt conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include <xslt.h>
+/* end */
+
+--------------------
+
+have_library: checking for exsltLibexsltVersion() in -lexslt... -------------------- yes
+
+"gcc -o conftest -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext -I/usr/include/libxml2 -I/usr/include/libxslt  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC   conftest.c  -L. -L/usr/lib -L/usr/lib -L. -Wl,-Bsymbolic-functions -rdynamic -Wl,-export-dynamic    -lxslt -lxml2 -lz -lm  -lruby1.8-static -lexslt -lxslt -lxml2 -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:3: error: ‘exsltLibexsltVersion’ undeclared (first use in this function)
+conftest.c:3: error: (Each undeclared identifier is reported only once
+conftest.c:3: error: for each function it appears in.)
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { void ((*volatile p)()); p = (void ((*)()))exsltLibexsltVersion; return 0; }
+/* end */
+
+"gcc -o conftest -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext -I/usr/include/libxml2 -I/usr/include/libxslt  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC   conftest.c  -L. -L/usr/lib -L/usr/lib -L. -Wl,-Bsymbolic-functions -rdynamic -Wl,-export-dynamic    -lxslt -lxml2 -lz -lm  -lruby1.8-static -lexslt -lxslt -lxml2 -lz -lm  -lpthread -lrt -ldl -lcrypt -lm   -lc"
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { exsltLibexsltVersion(); return 0; }
+/* end */
+
+--------------------
+
+have_header: checking for exslt.h... -------------------- no
+
+"gcc -E -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext -I/usr/include/libxml2 -I/usr/include/libxslt  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC    conftest.c -o conftest.i"
+conftest.c:1:19: error: exslt.h: No such file or directory
+checked program was:
+/* begin */
+1: #include <exslt.h>
+/* end */
+
+--------------------
+
+find_header: checking for exslt.h in /opt/include/libexslt,/usr/local/include/libexslt,/usr/include/libexslt... -------------------- yes
+
+"gcc -E -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext -I/usr/include/libxml2 -I/usr/include/libxslt  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC    conftest.c -o conftest.i"
+conftest.c:1:19: error: exslt.h: No such file or directory
+checked program was:
+/* begin */
+1: #include <exslt.h>
+/* end */
+
+"gcc -E -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext -I/usr/include/libxml2 -I/usr/include/libxslt  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC   -I/opt/include/libexslt conftest.c -o conftest.i"
+conftest.c:1:19: error: exslt.h: No such file or directory
+checked program was:
+/* begin */
+1: #include <exslt.h>
+/* end */
+
+"gcc -E -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext -I/usr/include/libxml2 -I/usr/include/libxslt  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC   -I/usr/local/include/libexslt conftest.c -o conftest.i"
+conftest.c:1:19: error: exslt.h: No such file or directory
+checked program was:
+/* begin */
+1: #include <exslt.h>
+/* end */
+
+"gcc -E -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext -I/usr/include/libxml2 -I/usr/include/libxslt  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC   -I/usr/include/libexslt conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include <exslt.h>
+/* end */
+
+--------------------
+
+have_header: checking for libxml/ruby_libxml.h... -------------------- yes
+
+"gcc -E -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext -I/usr/include/libxml2 -I/usr/include/libxslt -I/usr/include/libexslt  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC    conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include <libxml/ruby_libxml.h>
+/* end */
+
+--------------------
+
+have_header: checking for libxml/ruby_xml_document.h... -------------------- yes
+
+"gcc -E -I. -I/usr/lib/ruby/1.8/i486-linux -I. -I/home/phax/.gem/ruby/1.8/gems/libxml-ruby-1.1.3/ext -I/usr/include/libxml2 -I/usr/include/libxslt -I/usr/include/libexslt  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC    conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include <libxml/ruby_xml_document.h>
+/* end */
+
+--------------------
+
