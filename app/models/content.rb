@@ -37,10 +37,10 @@ class Content < ActiveRecord::Base
   end
 
   def transform_xml2html(xml_data)
-    xslt = XML::XSLT.new()
-    xslt.xml = xml_data.to_s
-    xslt.xsl = "#{RAILS_ROOT}/public/xml2html.xsl"
-    xslt.serve()
+    xslt = Nokogiri::XSLT(File.open("#{RAILS_ROOT}/public/xml2html.xsl", 'r'))
+    xml = Nokogiri::XML(xml_data.to_s)
+    logger.info xml_data.inspect
+    xslt.transform(xml).to_s
   end
 
   def create_xml_head
